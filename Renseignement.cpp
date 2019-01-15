@@ -35,7 +35,7 @@ Renseignement::Renseignement ( const Renseignement & unRenseignement )
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
+    cout << "Appel au constructeur de copie de <Renseignement>" << endl;
 #endif
 } //----- Fin de Renseignement (constructeur de copie)
 
@@ -45,7 +45,7 @@ Renseignement::Renseignement ( )
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <Renseignement>" << endl;
 #endif
 } //----- Fin de Renseignement
 
@@ -55,7 +55,7 @@ Renseignement::~Renseignement ( )
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <Renseignement>" << endl;
 #endif
 } //----- Fin de ~Renseignement
 

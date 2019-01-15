@@ -34,9 +34,9 @@
 
 //////////////////////////////////////////////////////////////////  PUBLIC
 //---------------------------------------------------- Fonctions publiques
-int main (int argc, char* argv)
+int main (int argc, char* argv[])
 {   
-    for(unsigned int i = 0; i < argc; i++)
+    for(int i = 0; i < argc; i++)
     {
 
     }

@@ -11,6 +11,7 @@
 #define RENSEIGNEMENT_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <map>
 
 //------------------------------------------------------------- Constantes
 
@@ -58,8 +59,9 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-//----------------------------------------------------- Attributs protégés
-
+//----------------------------------------------------- Attributs protégés	
+	int nbHitTotal;
+	map <char *, int> * referer;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Renseignement>
