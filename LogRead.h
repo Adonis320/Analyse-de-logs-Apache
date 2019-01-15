@@ -35,14 +35,6 @@ public:
     //
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Xxx & operator = ( const Xxx & unXxx );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 //-------------------------------------------- Constructeurs - destructeur
     LogRead ( const LogRead & unLogRead );
     // Mode d'emploi (constructeur de copie) :
@@ -50,11 +42,11 @@ public:
     // Contrat :
     //
 
-    LogRead ( );
+    LogRead (char * nomFic );
     // Mode d'emploi :
-    //
+    // 
     // Contrat :
-    //
+    //		Aucun
 
     virtual ~LogRead ( );
     // Mode d'emploi :
@@ -68,7 +60,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+	
+	char * nomFichier;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>

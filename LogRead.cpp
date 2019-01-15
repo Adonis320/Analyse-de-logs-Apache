@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Xxx  -  description
+                           LogRead  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 15 janvier 2019
+    copyright            : (C) 2019 par Richoux LUdovic et Kattan Adonis
+    e-mail               : ludovic.richoux@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <LogRead> (fichier LogRead.cpp) ------------
@@ -12,6 +12,7 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -28,34 +29,28 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-LogRead & LogRead::operator = ( const Xxx & unXxx )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
-
 //-------------------------------------------- Constructeurs - destructeur
 LogRead::LogRead ( const LogRead & unLogRead )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
+    cout << "Appel au constructeur de copie de <LogRead>" << endl;
 #endif
 } //----- Fin de Xxx (constructeur de copie)
 
 
-LogRead::LogRead ( )
+LogRead::LogRead (char * nomFic )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <LogRead>" << endl;
 #endif
-} //----- Fin de Xxx
+    nomFichier = new char[strlen(nomFic)];
+    strcpy(nomFichier,nomFic);
+    delete [] nomFic;
+} //----- Fin de LogRead
 
 
 LogRead::~LogRead ( )
@@ -63,9 +58,10 @@ LogRead::~LogRead ( )
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <LogRead>" << endl;
 #endif
-} //----- Fin de ~Xxx
+    delete [] nomFichier;
+} //----- Fin de ~LogRead
 
 
 //------------------------------------------------------------------ PRIVE
