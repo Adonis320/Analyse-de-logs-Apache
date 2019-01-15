@@ -30,6 +30,9 @@
 //
 // Contrat :
 //
+int main(int argc, char ** argv);
+
+void printManual();
 
 #endif // MAIN_H
 
