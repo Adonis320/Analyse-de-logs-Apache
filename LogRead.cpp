@@ -2,7 +2,7 @@
                            LogRead  -  description
                              -------------------
     début                : 15 janvier 2019
-    copyright            : (C) 2019 par Richoux LUdovic et Kattan Adonis
+    copyright            : (C) 2019 par Richoux LUdovic
     e-mail               : ludovic.richoux@insa-lyon.fr
 *************************************************************************/
 
@@ -12,7 +12,8 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
-#include <cstring>
+#include <string>
+#include <fstream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -23,44 +24,44 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type LogRead::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+string LogRead::getLine(unsigned int numLine)
+{
+    char * tampon = new char [500+1];
+    ifstream log;
+    log.open(nomFichier.c_str());
+    string ligne;
+    if(log.is_open())
+    {
+        for(unsigned int i=1; i<=numLine;++i)
+        {
+            log.getline(tampon,500);
+        }
+        ligne = string(tampon);
+    }
+    else
+    {
+        cerr << "Problème lors de l'ouverture du fichier" << endl;
+    }
+    delete [] tampon;
+    return ligne;
+}//-------Fin de la méthode getLine
 
 //-------------------------------------------- Constructeurs - destructeur
-LogRead::LogRead ( const LogRead & unLogRead )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <LogRead>" << endl;
-#endif
-} //----- Fin de Xxx (constructeur de copie)
 
-
-LogRead::LogRead (char * nomFic )
-// Algorithme :
-//
+LogRead::LogRead (string nomFic )
 {
 #ifdef MAP
     cout << "Appel au constructeur de <LogRead>" << endl;
 #endif
-    nomFichier = new char[strlen(nomFic)];
-    strcpy(nomFichier,nomFic);
-    delete [] nomFic;
+    nomFichier = nomFic;
 } //----- Fin de LogRead
 
 
 LogRead::~LogRead ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <LogRead>" << endl;
 #endif
-    delete [] nomFichier;
 } //----- Fin de ~LogRead
 
 

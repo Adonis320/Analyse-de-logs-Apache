@@ -14,7 +14,8 @@
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Main.h"
-
+#include "LogRead.h"
+#include "Cutter.h"
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
 
@@ -37,7 +38,21 @@ using namespace std;
 //---------------------------------------------------- Fonctions publiques
 int main (int argc, char* argv[])
 {   
-  if(argc == 1)
+  
+  LogRead log("test.log");
+  string uneLigne = log.getLine(5);
+
+  Cutter decoupe(uneLigne);
+  string date = decoupe.getDate();
+  cout << "test de découpe Date : " << endl << date << endl;
+  
+  string cible = decoupe.getCible();
+  cout << "test de découpe Cible : " << endl << cible << endl;
+
+  string referer = decoupe.getReferer();
+  cout << "test de découpe Referer : " << endl << referer << endl;
+  
+  /*if(argc == 1)
   {
     printManual();
   }
@@ -45,7 +60,7 @@ int main (int argc, char* argv[])
     {
 
     }
-    return 0;
+    return 0;*/
 }
 
 void printManual(){

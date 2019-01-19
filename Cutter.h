@@ -1,14 +1,14 @@
 /*************************************************************************
-                           LogRead  -  description
+                           Cutter  -  description
                              -------------------
-    début                : 15 janvier 2019
+    début                : 19 janvier 2019
     copyright            : (C) 2019 par Ludovic Richoux
-    e-mail               : ludovic.richoux@insa-lyon.fr
+    e-mail               : ludovic.richoux@laposte.net
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier LogRead.h) ----------------
-#if ! defined ( LOGREAD_H )
-#define LOGREAD_H
+//---------- Interface de la classe <Cutter> (fichier Cutter.h) ----------------
+#if ! defined ( CUTTER_H )
+#define CUTTER_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
@@ -17,37 +17,48 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <LogRead>
-// La classe LogRead permet l'ouverture d'un fichier .log et permet de
-// récupérer une ligne particulière de celui ci.
+// Rôle de la classe <Cutter>
+//      La classe Cutter permet de récupérer certaines informations comme la date, 
+//      la cible... depuis une ligne d'un log.
 //------------------------------------------------------------------------
 
-class LogRead
+class Cutter
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    string getLine(unsigned int numLine);
+    string getDate();
     // Mode d'emploi :
-    //      retourne la nième ligne du fichier nomfic
+    //
     // Contrat :
-    //      ne fonctionne pas pour un numéro de ligne égal à 0
+    //
 
+    string getCible();
+    // Mode d'emploi
+    //
+    // contrat :
+    //
+
+    string getReferer();
+    // Mode d'emploi
+    //
+    // contrat :
+    //
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    LogRead (string nomFic );
+    Cutter (string logLine );
     // Mode d'emploi :
-    //      créer un logRead
+    //
     // Contrat :
-    //		Aucun
+    //
 
-    virtual ~LogRead ( );
+    virtual ~Cutter ( );
     // Mode d'emploi :
-    //      détruit le LogRead courant
+    //
     // Contrat :
-    //      aucun
+    //
 
 //------------------------------------------------------------------ PRIVE
 
@@ -55,11 +66,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	
-	string nomFichier;
+    string log;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>
 
-#endif // LOGREAD_H
-
+#endif // CUTTER_H
