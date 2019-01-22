@@ -11,8 +11,12 @@
 /////////////////////////////////////////////////////////////////  INCLUDE
 //-------------------------------------------------------- Include système
 #include <iostream>
+<<<<<<< HEAD
 #include <stdio.h>
 #include <cstring>
+=======
+#include <list>
+>>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Main.h"
@@ -44,33 +48,54 @@ int main (int argc, char* argv[])
   /* // Exemple de cutter
   
   /*Renseignement r("MonReferer");
-  r.Affiche();
   r.Ajouter("deuxiemeReferer");
-  r.Affiche();
   r.Ajouter("TroisiemeReferer");
-  r.Affiche();
   r.Ajouter("deuxiemeReferer");
-  r.Affiche();*/
 
+  unsigned int nbhit = r.getHit();
+  unsigned int i = r.getHitReferer("deuxiemeReferer");
+  unsigned int j = r.getHitReferer("kdchzc");
 
+<<<<<<< HEAD
   /*LogRead log("test.log");
   string uneLigne = log.getLine(5);
+=======
+  cout << "nb hit total : " << nbhit << endl << "nbhit deuxiemeReferer : " << i << endl;
+  cout << "nbhit referer absent : " << j << endl;
+
+  list<string> referer = r.getReferer();
+  list<string>::const_iterator deb,fin;
+  deb = referer.cbegin();
+  fin = referer.cend();
+
+  while(deb!=fin)
+  {
+    cout << *deb << endl;
+    deb++;
+  }*/
+
+
+  LogRead log("anonyme.log");
+  string uneLigne = log.getLine(8);
+>>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
 
   Cutter decoupe(uneLigne);
-  string date = decoupe.getDate();
-  cout << "test de découpe Date : " << endl << date << endl;
+  string cible = decoupe.getCible();
+  cout << "test de découpe Date : " << endl << cible << endl;
 
+<<<<<<< HEAD
   string referer = decoupe.getReferer();
   cout << "test de découpe Referer : " << endl << referer << endl;
   
   int hour = decoupe.getHour();
   cout << "On affiche l'heure : " << hour << endl;*/
+=======
+  string extension = decoupe.getExtension();
+  cout << "extension : " << extension << endl;
+>>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
 
-  /*decoupe.setlogLine(log.getLine(1));
-  date = decoupe.getDate();
-  cout << "test de découpe Date : " << endl << date << endl;
-  
-  if(argc == 1)
+
+  /*if(argc == 1)
   {
     printManual();
   }
@@ -79,7 +104,13 @@ int main (int argc, char* argv[])
 */
   return 0;
 
+<<<<<<< HEAD
 } //------ Fin de main
+=======
+    }*/
+    return 0;
+}
+>>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
 
 void printManual()
 {

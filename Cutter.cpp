@@ -65,11 +65,22 @@ int Cutter::getHour()
 {
     string date = getDate();
     cout << date << endl;
-    string hour = date.substr(13,3);
+    string hour = date.substr(12,2);
     int heure = stoi(hour);
     return heure;
 }//----- Fin de la méthode getHour
 
+string Cutter::getExtension()
+{
+    string cible = getCible();
+    int positionPoint = cible.find_last_of('.') + 1;
+    int posFinChaine = cible.size();
+
+    string extension = cible.substr(positionPoint, posFinChaine-positionPoint);
+    return extension;
+}//----- Fin de la méthode getExtension
+
+//----------------------------------------------------- Constructeurs - Destructeurs
 Cutter::Cutter (string lignelog )
 {
 #ifdef MAP
