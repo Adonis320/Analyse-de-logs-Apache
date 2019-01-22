@@ -11,6 +11,8 @@
 /////////////////////////////////////////////////////////////////  INCLUDE
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <stdio.h>
+#include <string>
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Main.h"
@@ -38,7 +40,7 @@ using namespace std;
 //---------------------------------------------------- Fonctions publiques
 int main (int argc, char* argv[])
 {   
-  
+  /* // Exemple de cutter
   LogRead log("test.log");
   string uneLigne = log.getLine(5);
 
@@ -51,19 +53,14 @@ int main (int argc, char* argv[])
 
   string referer = decoupe.getReferer();
   cout << "test de découpe Referer : " << endl << referer << endl;
-  
-  /*if(argc == 1)
-  {
-    printManual();
-  }
-    for(int i = 0; i < argc; i++)
-    {
+  */
 
-    }
-    return 0;*/
-}
+  return 0;
 
-void printManual(){
+} //------ Fin de main
+
+void printManual()
+{
   cout << endl << "NAME" << endl;
   cout << "    analog - Analyse de log" << endl << endl;
   cout << "SYNOPSIS" << endl;
@@ -79,7 +76,99 @@ void printManual(){
   cout << "               ignore les extensions image-css-javascript + generate GraphViz file" << endl << endl;
   cout << "AUTHORS" << endl;
   cout << "     Written by Ludovic RICHOUX and Adonis KATTAN" << endl << endl;
+} //------ Fin de printManual
+
+void gestionParam(int nb, char * arg [])
+{
+  int * tabOption = {0, 0, 0,  0};
+                  // e, g, t, log
+  int tabCondition = {0,     0};
+                  // g-op, t-op
+  int afficheManual1 = 0;
+  int afficheManual2 = 0;
+  if(nb == 1) // lancement sans parametres
+  {
+    printManual();
+  }
+  else
+  { 
+    for(int i = 1; i < nb; i++)
+    {
+      if(!strcmp(arg[i],"e")) // cas du parametre e
+      {
+        tabOption[0] = 1;
+        if((i+1) < nb)
+        {
+
+        }
+      }
+      else if (!strcmp(arg[i],"g")
+      {
+        tabOption[1] = 1;
+      }
+      else if (!strcmp(arg[i], "t"))
+      {
+        tabOption[2] = 0;
+      }
+      else // cas ou le parametre est un .log ou un .dot ou un
+      {
+        if(paramIsFile == 1) //.log
+        {
+          //TODO 
+          tabOption[3] = 1;
+        }
+        else if(paramIsFile == 2) //.dot (g - option)
+        {
+          tabCondition[0] = 1;
+        }
+        else // t- option
+        {
+          tabOption[1] = 1;
+        }
+      }
+    }
+    for(int i = 0; i < 4; i++)
+    {
+      //TODO
+      for(int j = 0; j < 2; j++)
+      {
+      }
+    }
+  }
 }
+
+int paramIsFile (char * param) // 0- not file / 1- log / 2- dot
+{
+  int val = 0;
+  int taille = strlen(param);
+  int format = 0;
+  char * parametre = new char [30];
+  if(strlen(param) < 4) // (.log && .dot : size = 4 chars)
+  {
+    format = 0;
+  } 
+  else
+  {
+    for(int i = taille; i < taille-4; i--)
+    {
+      parametre[4-i] = param[i];
+    }
+    if(!strcmp(parametre,".log")
+    {
+      format = 1;
+    }
+    else if (!strcmp(parametre,".dot")
+    {
+      format = 2;
+    }
+    else //c'est autre chose
+    {
+      format = 0;
+    }
+  }
+  delete [] parametre;
+  return format;
+} //----- Fin de paramIsFile
 //type Nom ( liste de paramètres )
 // Algorithme :
 //

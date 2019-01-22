@@ -28,6 +28,13 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+void Gestionnaire::Ajouter(Renseignement * rens, string cible)
+{
+    iterator it_recherche = mymap.find(cible);
+
+    if(it_recherche = )
+     
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 ///Xxx & Xxx::operator = ( const Xxx & unXxx )
@@ -38,24 +45,14 @@ using namespace std;
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Gestionnaire::Gestionnaire ( const Gestionnaire & unXxx )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx (constructeur de copie)
-
-
 Gestionnaire::Gestionnaire ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <Gestionnaire>" << endl;
 #endif
-} //----- Fin de Xxx
+} //----- Fin de Gestionnaire
 
 
 Gestionnaire::~Gestionnaire ( )
@@ -63,9 +60,9 @@ Gestionnaire::~Gestionnaire ( )
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <Gestionnaire>" << endl;
 #endif
-} //----- Fin de ~Xxx
+} //----- Fin de ~Gestionnaire
 
 
 //------------------------------------------------------------------ PRIVE
