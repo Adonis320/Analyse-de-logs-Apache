@@ -12,12 +12,13 @@
 //-------------------------------------------------------- Include système
 #include <iostream>
 #include <stdio.h>
-#include <string>
+#include <cstring>
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Main.h"
 #include "LogRead.h"
 #include "Cutter.h"
+#include "Renseignement.h"
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
 
@@ -41,20 +42,41 @@ using namespace std;
 int main (int argc, char* argv[])
 {   
   /* // Exemple de cutter
-  LogRead log("test.log");
+  
+  /*Renseignement r("MonReferer");
+  r.Affiche();
+  r.Ajouter("deuxiemeReferer");
+  r.Affiche();
+  r.Ajouter("TroisiemeReferer");
+  r.Affiche();
+  r.Ajouter("deuxiemeReferer");
+  r.Affiche();*/
+
+
+  /*LogRead log("test.log");
   string uneLigne = log.getLine(5);
 
   Cutter decoupe(uneLigne);
   string date = decoupe.getDate();
   cout << "test de découpe Date : " << endl << date << endl;
-  
-  string cible = decoupe.getCible();
-  cout << "test de découpe Cible : " << endl << cible << endl;
 
   string referer = decoupe.getReferer();
   cout << "test de découpe Referer : " << endl << referer << endl;
-  */
+  
+  int hour = decoupe.getHour();
+  cout << "On affiche l'heure : " << hour << endl;*/
 
+  /*decoupe.setlogLine(log.getLine(1));
+  date = decoupe.getDate();
+  cout << "test de découpe Date : " << endl << date << endl;
+  
+  if(argc == 1)
+  {
+    printManual();
+  }
+    for(int i = 0; i < argc; i++)
+    {
+*/
   return 0;
 
 } //------ Fin de main
@@ -80,9 +102,9 @@ void printManual()
 
 void gestionParam(int nb, char * arg [])
 {
-  int * tabOption = {0, 0, 0,  0};
+  int tabOption [] = {0, 0, 0,  0};
                   // e, g, t, log
-  int tabCondition = {0,     0};
+  int tabCondition [] = {0,     0};
                   // g-op, t-op
   int afficheManual1 = 0;
   int afficheManual2 = 0;
@@ -102,7 +124,7 @@ void gestionParam(int nb, char * arg [])
 
         }
       }
-      else if (!strcmp(arg[i],"g")
+      else if (!strcmp(arg[i],"g"))
       {
         tabOption[1] = 1;
       }
@@ -112,18 +134,18 @@ void gestionParam(int nb, char * arg [])
       }
       else // cas ou le parametre est un .log ou un .dot ou un
       {
-        if(paramIsFile == 1) //.log
+        if(paramIsFile(arg[i]) == 1) //.log
         {
           //TODO 
           tabOption[3] = 1;
         }
-        else if(paramIsFile == 2) //.dot (g - option)
+        else if(paramIsFile(arg[i]) == 2) //.dot (g - option)
         {
           tabCondition[0] = 1;
         }
         else // t- option
         {
-          tabOption[1] = 1;
+          tabCondition[1] = 1;
         }
       }
     }
@@ -153,11 +175,11 @@ int paramIsFile (char * param) // 0- not file / 1- log / 2- dot
     {
       parametre[4-i] = param[i];
     }
-    if(!strcmp(parametre,".log")
+    if(!strcmp(parametre,".log"))
     {
       format = 1;
     }
-    else if (!strcmp(parametre,".dot")
+    else if (!strcmp(parametre,".dot"))
     {
       format = 2;
     }

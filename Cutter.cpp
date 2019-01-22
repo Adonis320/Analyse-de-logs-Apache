@@ -23,46 +23,60 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+void Cutter::setlogLine(string uneLigne)
+{
+    logLine = uneLigne;
+}//---------- Fin de la méthode setlogLine
+
 string Cutter::getDate()
 {
-    int debutDate = log.find_first_of('[') + 1;
-    int finDate = log.find_first_of(']',debutDate);
+    int debutDate = logLine.find_first_of('[') + 1;
+    int finDate = logLine.find_first_of(' ',debutDate);
     int dateLength = finDate - debutDate;
-    string date = log.substr(debutDate,dateLength);
+    string date = logLine.substr(debutDate,dateLength);
     return date;
 } //----- Fin de Méthode getDate
 
 string Cutter::getCible()
 {
-    int debutReq = log.find_first_of('"') + 1;
-    int finReq = log.find_first_of('"' , debutReq);
+    int debutReq = logLine.find_first_of('"') + 1;
+    int finReq = logLine.find_first_of('"' , debutReq);
 
-    int debutCible  = log.find_first_of('/', debutReq);
-    int finCible = log.find_last_of(' ', finReq);
+    int debutCible  = logLine.find_first_of('/', debutReq);
+    int finCible = logLine.find_last_of(' ', finReq);
 
     int cibleLength = finCible - debutCible;
-    string cible = log.substr(debutCible,cibleLength);
+    string cible = logLine.substr(debutCible,cibleLength);
     return cible;
 } //----- Fin de Méthode getCible
 
 string Cutter::getReferer()
 {
-    int debutReq = log.find_first_of('"') + 1;
-    int finReq = log.find_first_of('"' , debutReq);
+    int debutReq = logLine.find_first_of('"') + 1;
+    int finReq = logLine.find_first_of('"' , debutReq);
     
-    int debutReferer = log.find_first_of('"',finReq + 1) + 1;
-    int finReferer = log.find_first_of('"', debutReferer);
-    string referer = log.substr(debutReferer, finReferer - debutReferer);
+    int debutReferer = logLine.find_first_of('"',finReq + 1) + 1;
+    int finReferer = logLine.find_first_of('"', debutReferer);
+    string referer = logLine.substr(debutReferer, finReferer - debutReferer);
     return referer;
 } //----- Fin de Méthode getReferer
 
-Cutter::Cutter (string logLine )
+int Cutter::getHour()
+{
+    string date = getDate();
+    cout << date << endl;
+    string hour = date.substr(13,3);
+    int heure = stoi(hour);
+    return heure;
+}//----- Fin de la méthode getHour
+
+Cutter::Cutter (string lignelog )
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Cutter>" << endl;
 #endif
 
-    log = logLine;
+    logLine = lignelog;
 } //----- Fin de Cutter
 
 

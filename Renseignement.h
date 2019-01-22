@@ -2,7 +2,7 @@
                            Renseignement  -  description
                              -------------------
     début                : 15 janvier 2019
-    copyright            : (C) 2019 par Richoux Ludovic et Kattan Adonis
+    copyright            : (C) 2019 par Richoux Ludovic
     e-mail               : ludovic.richoux@insa-lyon.fr
 *************************************************************************/
 
@@ -12,15 +12,14 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <map>
-
+#include <string>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Renseignement>
-//
-//
+// Cette classe contient les informations concernant une cible donnée
 //------------------------------------------------------------------------
 
 class Renseignement
@@ -29,20 +28,29 @@ class Renseignement
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    void Affiche();
     // Mode d'emploi :
-    //
+    //      Permet l'affichage du nombre de hit total ainsi que les 
+    //      paires clés valeurs de la map
     // Contrat :
-    //
+    //      Aucun
+
+    void Ajouter(string referer);
+    // Mode d'emploi
+    //      Si le referer est déjà présent, on modifie le 
+    //      nombre de hit, sinon on ajoute le referer
+    //      et met à jour le nombre de hit total de la cible
+    // contrat
+    //      aucun
+
+    unsigned int getHit();
+    // Mode d'emploi
+    //      renvoie le nombre de hit total
+    // contrat:
+    //      Aucun
 
 //-------------------------------------------- Constructeurs - destructeur
-    Renseignement ( const Renseignement & UNRenseignement );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    Renseignement ( );
+    Renseignement (string referer);
     // Mode d'emploi :
     //
     // Contrat :
@@ -60,8 +68,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés	
-	int nbHitTotal;
-	map <char *, int> * referer;
+	unsigned int nbHitTotal;
+	map <string, int> * tabReferer;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Renseignement>

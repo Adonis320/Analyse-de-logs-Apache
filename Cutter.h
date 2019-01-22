@@ -28,27 +28,39 @@ class Cutter
 
 public:
 //----------------------------------------------------- Méthodes publiques
+    void setlogLine(string uneLigne);
+    // Mode d'emploi
+    // 
+    // contrat
+    //      La ligne du log suit le format Apache
+    
     string getDate();
     // Mode d'emploi :
     //
     // Contrat :
-    //
+    //      La ligne du log suit le format Apache
 
     string getCible();
-    // Mode d'emploi
+    // Mode d'emploi :
     //
     // contrat :
-    //
+    //      La ligne du log suit le format Apache
 
     string getReferer();
-    // Mode d'emploi
+    // Mode d'emploi :
     //
     // contrat :
+    //      La ligne du log suit le format Apache
+
+    int getHour();
+    // Mode d'emploi :
     //
+    // contrat:
+    //      La ligne du log suit le format Apache
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Cutter (string logLine );
+    Cutter (string ligneLog );
     // Mode d'emploi :
     //
     // Contrat :
@@ -66,7 +78,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    string log;
+    string logLine;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>
