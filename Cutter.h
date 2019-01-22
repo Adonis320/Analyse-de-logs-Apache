@@ -58,6 +58,12 @@ public:
     // contrat:
     //      La ligne du log suit le format Apache
 
+    string getExtension();
+    // Mode d'empoi : 
+    //
+    // contrat :
+    //      La ligne du log suit le format Apache
+
 //-------------------------------------------- Constructeurs - destructeur
 
     Cutter (string ligneLog );

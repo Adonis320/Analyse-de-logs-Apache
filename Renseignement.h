@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <map>
+#include <list>
 #include <string>
 //------------------------------------------------------------- Constantes
 
@@ -48,6 +49,19 @@ public:
     //      renvoie le nombre de hit total
     // contrat:
     //      Aucun
+
+    unsigned int getHitReferer(string referer);
+    // Mode d'emploi :
+    //      renvoie le nombre de hit associé au referer passé en paramètre
+    //      renvoie 0 si le referer n'existe pas
+    // contrat :
+    //      aucun
+
+    list<string> getReferer();
+    // Mode d'emploi :
+    //      récupère tous les referer et les place dans la liste
+    // contrat : 
+    //      aucun
 
 //-------------------------------------------- Constructeurs - destructeur
     Renseignement (string referer);

@@ -61,6 +61,43 @@ unsigned int Renseignement::getHit()
     return nbHitTotal;
 }//----- Fin de la méthode getHit
 
+unsigned int Renseignement::getHitReferer(string referer)
+{
+    map<string,int>::iterator position;
+    map<string,int>::const_iterator end;
+
+    end = tabReferer->cend();
+    position = tabReferer->find(referer);
+    int nbHit;
+
+    if(position == end)
+    {
+        nbHit=0;
+    }
+    else
+    {
+        nbHit=position->second;
+    }
+    
+    return nbHit;
+}//----- Fin de la méthode getHitReferer
+
+list<string> Renseignement::getReferer()
+{
+    list<string> liste;
+    map<string,int>::const_iterator debut,fin;
+    debut = tabReferer->cbegin();
+    fin = tabReferer->cend();
+
+    while(debut!=fin)
+    {
+        liste.push_back(debut->first);
+        debut++;
+    }
+    return liste;
+
+}//----- Fin de la méthode getReferer
+
 //-------------------------------------------- Constructeurs - destructeur
 
 Renseignement::Renseignement (string referer)

@@ -11,6 +11,7 @@
 /////////////////////////////////////////////////////////////////  INCLUDE
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <list>
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Main.h"
@@ -41,38 +42,49 @@ int main (int argc, char* argv[])
 {   
   
   /*Renseignement r("MonReferer");
-  r.Affiche();
   r.Ajouter("deuxiemeReferer");
-  r.Affiche();
   r.Ajouter("TroisiemeReferer");
-  r.Affiche();
   r.Ajouter("deuxiemeReferer");
-  r.Affiche();*/
+
+  unsigned int nbhit = r.getHit();
+  unsigned int i = r.getHitReferer("deuxiemeReferer");
+  unsigned int j = r.getHitReferer("kdchzc");
+
+  cout << "nb hit total : " << nbhit << endl << "nbhit deuxiemeReferer : " << i << endl;
+  cout << "nbhit referer absent : " << j << endl;
+
+  list<string> referer = r.getReferer();
+  list<string>::const_iterator deb,fin;
+  deb = referer.cbegin();
+  fin = referer.cend();
+
+  while(deb!=fin)
+  {
+    cout << *deb << endl;
+    deb++;
+  }*/
 
 
-  LogRead log("test.log");
-  string uneLigne = log.getLine(5);
+  LogRead log("anonyme.log");
+  string uneLigne = log.getLine(8);
 
   Cutter decoupe(uneLigne);
-  string date = decoupe.getDate();
-  cout << "test de découpe Date : " << endl << date << endl;
+  string cible = decoupe.getCible();
+  cout << "test de découpe Date : " << endl << cible << endl;
 
-  int hour = decoupe.getHour();
-  cout << "On affiche l'heure : " << hour << endl;
+  string extension = decoupe.getExtension();
+  cout << "extension : " << extension << endl;
 
-  /*decoupe.setlogLine(log.getLine(1));
-  date = decoupe.getDate();
-  cout << "test de découpe Date : " << endl << date << endl;
-  
-  if(argc == 1)
+
+  /*if(argc == 1)
   {
     printManual();
   }
     for(int i = 0; i < argc; i++)
     {
 
-    }
-    return 0;*/
+    }*/
+    return 0;
 }
 
 void printManual(){
