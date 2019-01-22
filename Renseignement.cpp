@@ -22,31 +22,55 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Renseignement::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+void Renseignement::Affiche()
+{
+    cout << "nb de hit total : " << nbHitTotal << endl;
+    map<string,int>::iterator debut, fin;
+    
+    debut = tabReferer->begin();
+    fin = tabReferer->end();
 
+    while(debut!=fin)
+    {
+        cout << debut->first << " " << debut->second << endl;
+        debut++;
+    }
+
+    cout << endl;
+} //----- Fin de Méthode Affiche
+
+void Renseignement::Ajouter(string referer)
+{
+    map<string,int>::iterator position;
+    map<string,int>::const_iterator end = tabReferer->cend();
+    position = tabReferer->find(referer);
+
+    if(position == end)
+    {
+        tabReferer->insert(pair<string, int>(referer,1));
+    }
+    else
+    {
+        position->second = position->second + 1;
+    }
+    nbHitTotal++;
+}//------ Fin de la méthode Ajouter
+
+unsigned int Renseignement::getHit()
+{
+    return nbHitTotal;
+}//----- Fin de la méthode getHit
 
 //-------------------------------------------- Constructeurs - destructeur
-Renseignement::Renseignement ( const Renseignement & unRenseignement )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Renseignement>" << endl;
-#endif
-} //----- Fin de Renseignement (constructeur de copie)
 
-
-Renseignement::Renseignement ( )
-// Algorithme :
-//
+Renseignement::Renseignement (string referer)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Renseignement>" << endl;
 #endif
+    nbHitTotal = 1;
+    tabReferer = new map<string,int>;
+    tabReferer->insert(pair<string, int>(referer,1));
 } //----- Fin de Renseignement
 
 
@@ -57,6 +81,8 @@ Renseignement::~Renseignement ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Renseignement>" << endl;
 #endif
+    delete tabReferer;
+
 } //----- Fin de ~Renseignement
 
 
