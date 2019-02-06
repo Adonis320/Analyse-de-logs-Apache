@@ -16,7 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Gestionnaire.h"
-
+#include "Renseignement.h"
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
@@ -28,6 +28,39 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+void Gestionnaire::Ajouter(string referer, string cible)
+{
+    map<string,Renseignement*>::iterator position;
+    map<string,Renseignement*>::const_iterator end = Table_Cibles->cend();
+    position = Table_Cibles->find(cible);
+
+    if(position == end)
+    {
+        Renseignement * rens = new Renseignement(referer);
+        Table_Cibles->insert(pair<string,Renseignement*>(cible,rens));
+    }
+    else if (position != end)
+    {
+        (position->second) -> Ajouter(referer);
+    } 
+} //------Fin de Ajouter
+
+void Gestionnaire::FindTen()
+{   
+    map<string,Renseignement*>::iterator element;
+    map<string,Renseignement*>::iterator end;
+    int max = 0;
+    element = Table_Cibles -> begin();
+    end = Table_Cibles -> end();
+    while(element != end)
+    {
+        if((element->second)->getHit > max)
+        {
+            max = (element->second)->getHit -> first;
+        }
+    }
+} //----Fin de FindTen
+//pour afficher les 10 premiers il faut creer une autre map 
 
 //------------------------------------------------- Surcharge d'opérateurs
 ///Xxx & Xxx::operator = ( const Xxx & unXxx )
@@ -38,24 +71,15 @@ using namespace std;
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Gestionnaire::Gestionnaire ( const Gestionnaire & unXxx )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx (constructeur de copie)
-
-
 Gestionnaire::Gestionnaire ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <Gestionnaire>" << endl;
 #endif
-} //----- Fin de Xxx
+    Table_Cibles = new map <string,Renseignement*>;
+} //----- Fin de Gestionnaire
 
 
 Gestionnaire::~Gestionnaire ( )
@@ -63,9 +87,9 @@ Gestionnaire::~Gestionnaire ( )
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <Gestionnaire>" << endl;
 #endif
-} //----- Fin de ~Xxx
+} //----- Fin de ~Gestionnaire
 
 
 //------------------------------------------------------------------ PRIVE

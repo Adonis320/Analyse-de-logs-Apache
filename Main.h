@@ -34,5 +34,8 @@ int main(int argc, char * argv[]);
 
 void printManual();
 
+void gestionParam(int nb, char * arg[]);
+
+int paramIsFile(char * param);
 #endif // MAIN_H
 

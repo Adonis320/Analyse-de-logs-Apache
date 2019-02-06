@@ -11,7 +11,10 @@
 #define GESTIONNAIRE_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <map>
+#include "Renseignement.h"
+#include <cstring>
+#include <vector>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -34,6 +37,9 @@ public:
     // Contrat :
     //
 
+    void Gestionnaire::Ajouter(string referer, string cible);
+
+    void Gestionnaire::FindTen();
 
 //------------------------------------------------- Surcharge d'opérateurs
   //  Xxx & operator = ( const Xxx & unXxx );
@@ -44,12 +50,6 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Gestionnaire ( const Gestionnaire & unXxx );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
     Gestionnaire ( );
     // Mode d'emploi :
     //
@@ -68,7 +68,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    map < string, Renseignement * > * Table_Cibles;
+    map < string, int > * Table_Ten; 
 };
 
 //-------------------------------- Autres définitions dépendantes de <Gestionnaire>
