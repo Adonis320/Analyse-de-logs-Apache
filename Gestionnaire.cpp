@@ -49,15 +49,15 @@ void Gestionnaire::FindTen()
 {   
     map<string,Renseignement*>::iterator element;
     map<string,Renseignement*>::iterator end;
-    int max = 0;
+    //int max = 0;
     element = Table_Cibles -> begin();
     end = Table_Cibles -> end();
     while(element != end)
     {
-        if((element->second)->getHit > max)
+        /*if((element->second)->getHit() > max)
         {
-            max = (element->second)->getHit -> first;
-        }
+            max = (element->second)->getHit() -> first;
+        }*/
     }
 } //----Fin de FindTen
 //pour afficher les 10 premiers il faut creer une autre map 

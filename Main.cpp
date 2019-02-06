@@ -2,8 +2,8 @@
                            Main  -  description
                              -------------------
     début                : 15 janvier 2019
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    copyright            : (C) 2019 par Kattan Adonis et Richoux Ludovic
+    e-mail               : ludovic.richoux@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation du module <Main> (fichier Main.cpp) ---------------
@@ -11,107 +11,123 @@
 /////////////////////////////////////////////////////////////////  INCLUDE
 //-------------------------------------------------------- Include système
 #include <iostream>
-<<<<<<< HEAD
-#include <stdio.h>
-#include <cstring>
-=======
 #include <list>
->>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
+#include <cstring>
+
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Main.h"
 #include "LogRead.h"
 #include "Cutter.h"
 #include "Renseignement.h"
-///////////////////////////////////////////////////////////////////  PRIVE
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
-//---------------------------------------------------- Variables statiques
-
-//------------------------------------------------------ Fonctions privées
 
 //////////////////////////////////////////////////////////////////  PUBLIC
 //---------------------------------------------------- Fonctions publiques
 int main (int argc, char* argv[])
 {   
-  /* // Exemple de cutter
-  
-  /*Renseignement r("MonReferer");
-  r.Ajouter("deuxiemeReferer");
-  r.Ajouter("TroisiemeReferer");
-  r.Ajouter("deuxiemeReferer");
+  string nameLogFile;
+  string nameDotFile;
+  char tabParam[] = {'0','0','0'};
+  int positionTabParam =0;
+  int hour = -1; // heure laissée à -1 si pas de 
 
-  unsigned int nbhit = r.getHit();
-  unsigned int i = r.getHitReferer("deuxiemeReferer");
-  unsigned int j = r.getHitReferer("kdchzc");
+  bool requete = true;
 
-<<<<<<< HEAD
-  /*LogRead log("test.log");
-  string uneLigne = log.getLine(5);
-=======
-  cout << "nb hit total : " << nbhit << endl << "nbhit deuxiemeReferer : " << i << endl;
-  cout << "nbhit referer absent : " << j << endl;
-
-  list<string> referer = r.getReferer();
-  list<string>::const_iterator deb,fin;
-  deb = referer.cbegin();
-  fin = referer.cend();
-
-  while(deb!=fin)
+  if(argc == 1 )        // pas de nom de fichier passé en paramètre
   {
-    cout << *deb << endl;
-    deb++;
-  }*/
+      requete = false;
+  }
+  else
+  {
+    for (int i = 1 ; i< argc ; ++i)
+    {
+      if(i == argc - 1) // permet de vérifier conformité du fichier .log donné en paramètre
+      {
+        if(strcmp((getExtension(argv[i])).c_str(),"log") != 0)
+        {
+          requete = false;
+          break;
+        }
+        else
+        {
+          nameLogFile = argv[i];
+        }
+      } 
+      else if(strcmp(argv[i], "-e") == 0) // test -e passé en paramètre
+      {
+        tabParam[positionTabParam] = 'e';
+        positionTabParam++;
+      }
+      else if (strcmp (argv[i], "-g") == 0) // test -g passé en paramètre et cherche nom fichier
+      {
+        if( (i + 1) < argc -1 && strcmp((getExtension(argv[i + 1])).c_str(),"dot") == 0) // le suivant est un fichier .dot conforme
+        {
+          nameDotFile = argv[++i];
+        }
+        else if ( (i+1) < argc -1 && strcmp(getExtension(argv[i + 1]).c_str(),"" ) == 0)
+        {
+          nameDotFile = "Default.log";
+        }
+        else if ( (i+1 < argc -1))
+        {
+          requete = false;
+          break;
+        }
 
+        tabParam[positionTabParam] = 'g';
+        positionTabParam++;
 
-  LogRead log("anonyme.log");
-  string uneLigne = log.getLine(8);
->>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
-
-  Cutter decoupe(uneLigne);
-  string cible = decoupe.getCible();
-  cout << "test de découpe Date : " << endl << cible << endl;
-
-<<<<<<< HEAD
-  string referer = decoupe.getReferer();
-  cout << "test de découpe Referer : " << endl << referer << endl;
+      }
+      else if(strcmp (argv[i], "-t") == 0) // test -t passé en paramètre et chercher heure associée
+      {
+        string heure = argv[i+1];
+        char dizaine = heure[0];
+        char unite = heure[1];
+        
+        if (heure.size() != 2 || dizaine > '2' || dizaine < '0' || unite > '9' || unite < '0' ) // vérifie la conformité de l'heure 
+        {
+          requete =false;
+          break;
+        }
+        else
+        {
+          tabParam[positionTabParam] = 't';
+          positionTabParam++;
+          hour = atoi(argv[++i]);
+        }
+        
+      }
+      else // option inconnue
+      {
+        requete = false;
+        break;
+      }
+      
+    }
+  }
   
-  int hour = decoupe.getHour();
-  cout << "On affiche l'heure : " << hour << endl;*/
-=======
-  string extension = decoupe.getExtension();
-  cout << "extension : " << extension << endl;
->>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
-
-
-  /*if(argc == 1)
+  if(!requete)
   {
     printManual();
   }
-    for(int i = 0; i < argc; i++)
-    {
-*/
+  else
+  {
+    requeteCatalogue (nameLogFile, tabParam, hour, nameDotFile);
+  }
+  
   return 0;
-
-<<<<<<< HEAD
 } //------ Fin de main
-=======
-    }*/
-    return 0;
-}
->>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
 
 void printManual()
 {
-  cout << endl << "NAME" << endl;
+  cout << "-----MANUEL-------" << endl;
+  /*cout << endl << "NAME" << endl;
   cout << "    analog - Analyse de log" << endl << endl;
   cout << "SYNOPSIS" << endl;
-  cout << "    ./analog [OPTION]....FILE" << endl << endl;
+  cout << "    ./analog [OPTION]....Namefile.log" << endl << endl;
   cout << "DESCRIPTION" << endl;
-  cout << "    -g FILE, --export-to-GraphViz             " << endl << endl;
-  cout << "    -t HOUR, --include-query-within-hour-hour+1" << endl << endl;
+  cout << "    -g Namefile.dot, --export-to-GraphViz-if-not-mentionned-export-in-default.log" << endl << endl;
+  cout << "    -t HOUR (HH-2-DIGITS), --include-query-within-hour-hour+1" << endl << endl;
   cout << "    -e,        --exclude-image-css-javascript" << endl << endl;
   cout << "EXAMPLES" << endl;
   cout << "    ./analog nomFichier.log" << endl;
@@ -119,102 +135,30 @@ void printManual()
   cout << "    ./analog -e -g nomFichier.dot nomFichier.log" << endl;
   cout << "               ignore les extensions image-css-javascript + generate GraphViz file" << endl << endl;
   cout << "AUTHORS" << endl;
-  cout << "     Written by Ludovic RICHOUX and Adonis KATTAN" << endl << endl;
+  cout << "     Written by Ludovic RICHOUX and Adonis KATTAN" << endl << endl;*/
 } //------ Fin de printManual
 
-void gestionParam(int nb, char * arg [])
+string getExtension (string nomFichier)
 {
-  int tabOption [] = {0, 0, 0,  0};
-                  // e, g, t, log
-  int tabCondition [] = {0,     0};
-                  // g-op, t-op
-  int afficheManual1 = 0;
-  int afficheManual2 = 0;
-  if(nb == 1) // lancement sans parametres
+  // string:: npos si on trouve pas
+  string extension;
+  size_t position = nomFichier.find_last_of("."); 
+
+  if(position == string::npos)
   {
-    printManual();
+    extension = "";
   }
   else
-  { 
-    for(int i = 1; i < nb; i++)
-    {
-      if(!strcmp(arg[i],"e")) // cas du parametre e
-      {
-        tabOption[0] = 1;
-        if((i+1) < nb)
-        {
-
-        }
-      }
-      else if (!strcmp(arg[i],"g"))
-      {
-        tabOption[1] = 1;
-      }
-      else if (!strcmp(arg[i], "t"))
-      {
-        tabOption[2] = 0;
-      }
-      else // cas ou le parametre est un .log ou un .dot ou un
-      {
-        if(paramIsFile(arg[i]) == 1) //.log
-        {
-          //TODO 
-          tabOption[3] = 1;
-        }
-        else if(paramIsFile(arg[i]) == 2) //.dot (g - option)
-        {
-          tabCondition[0] = 1;
-        }
-        else // t- option
-        {
-          tabCondition[1] = 1;
-        }
-      }
-    }
-    for(int i = 0; i < 4; i++)
-    {
-      //TODO
-      for(int j = 0; j < 2; j++)
-      {
-      }
-    }
+  {
+    extension = nomFichier.substr(position + 1);
   }
-}
+    
+  return extension;
+}//--------- Fin de getExtension
 
-int paramIsFile (char * param) // 0- not file / 1- log / 2- dot
+void requeteCatalogue(string nomLog, char param[], int heure, string nomFichierGraph)
 {
-  int val = 0;
-  int taille = strlen(param);
-  int format = 0;
-  char * parametre = new char [30];
-  if(strlen(param) < 4) // (.log && .dot : size = 4 chars)
-  {
-    format = 0;
-  } 
-  else
-  {
-    for(int i = taille; i < taille-4; i--)
-    {
-      parametre[4-i] = param[i];
-    }
-    if(!strcmp(parametre,".log"))
-    {
-      format = 1;
-    }
-    else if (!strcmp(parametre,".dot"))
-    {
-      format = 2;
-    }
-    else //c'est autre chose
-    {
-      format = 0;
-    }
-  }
-  delete [] parametre;
-  return format;
-} //----- Fin de paramIsFile
-//type Nom ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- fin de Nom
+  // si les options sont pas demandées: hour =-1, nomFichierGraph ="", et tabParam = [0]
+  cout << "execution de la requete avec param demandé" << endl;
+
+}//---------- Fin de requete Catalogue

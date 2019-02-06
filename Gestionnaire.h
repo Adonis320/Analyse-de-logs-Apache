@@ -37,9 +37,9 @@ public:
     // Contrat :
     //
 
-    void Gestionnaire::Ajouter(string referer, string cible);
+    void Ajouter(string referer, string cible);
 
-    void Gestionnaire::FindTen();
+    void FindTen();
 
 //------------------------------------------------- Surcharge d'opérateurs
   //  Xxx & operator = ( const Xxx & unXxx );
