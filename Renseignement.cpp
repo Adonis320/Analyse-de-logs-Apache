@@ -25,7 +25,8 @@ using namespace std;
 void Renseignement::Affiche()
 {
     cout << "nb de hit total : " << nbHitTotal << endl;
-    map<string,int>::iterator debut, fin;
+    map<string,int>::iterator debut;
+    map<string,int>::iterator fin;
     
     debut = tabReferer->begin();
     fin = tabReferer->end();
@@ -42,7 +43,7 @@ void Renseignement::Affiche()
 void Renseignement::Ajouter(string referer)
 {
     map<string,int>::iterator position;
-    map<string,int>::const_iterator end = tabReferer->cend();
+    map<string,int>::iterator end = tabReferer->end();
     position = tabReferer->find(referer);
 
     if(position == end)
@@ -51,7 +52,7 @@ void Renseignement::Ajouter(string referer)
     }
     else
     {
-        position->second = position->second + 1;
+     //   position->second = position->second + 1;
     }
     nbHitTotal++;
 }//------ Fin de la méthode Ajouter

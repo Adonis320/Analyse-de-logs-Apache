@@ -14,7 +14,6 @@
 #include <map>
 #include "Renseignement.h"
 #include <cstring>
-#include <vector>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -37,9 +36,9 @@ public:
     // Contrat :
     //
 
-    void Gestionnaire::Ajouter(string referer, string cible);
-
-    void Gestionnaire::FindTen();
+    void Ajouter(string referer, string cible);
+    void Afficher();
+    void FindTen();
 
 //------------------------------------------------- Surcharge d'opérateurs
   //  Xxx & operator = ( const Xxx & unXxx );
@@ -69,7 +68,6 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
     map < string, Renseignement * > * Table_Cibles;
-    map < string, int > * Table_Ten; 
 };
 
 //-------------------------------- Autres définitions dépendantes de <Gestionnaire>

@@ -11,18 +11,16 @@
 /////////////////////////////////////////////////////////////////  INCLUDE
 //-------------------------------------------------------- Include système
 #include <iostream>
-<<<<<<< HEAD
 #include <stdio.h>
 #include <cstring>
-=======
 #include <list>
->>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Main.h"
 #include "LogRead.h"
 #include "Cutter.h"
 #include "Renseignement.h"
+#include "Gestionnaire.h"
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
 
@@ -45,10 +43,36 @@ using namespace std;
 //---------------------------------------------------- Fonctions publiques
 int main (int argc, char* argv[])
 {   
+  /* /////////TEST POUR LE FINDTEN()
+  Gestionnaire * a = new Gestionnaire(); 
+  a->Ajouter("B","A");
+  a->Ajouter("C","D");
+  a->Ajouter("D","C");
+ a->Ajouter("E","C"); 
+  a->Ajouter("F","J");
+  a->Ajouter("J","H");
+  a->Ajouter("LOL","M");
+  a->Ajouter("LOL","M");
+  a->Ajouter("LOL","M");
+  a->Ajouter("LOL","M");
+  a->Ajouter("LOL","M");
+  a->Ajouter("LOL","O");
+  a->Ajouter("LOL","P");
+  a->Ajouter("LOL","Q");
+  a->Ajouter("LOL","R");
+  a->Ajouter("LOL","S");
+  a->Ajouter("LOL","Sddw");
+  a->Ajouter("LOL","Sddw");
+  a->Afficher();
+  a->FindTen();
+  delete a;
+  */
+
+
   /* // Exemple de cutter
   
   /*Renseignement r("MonReferer");
-  r.Ajouter("deuxiemeReferer");
+  r.Ajouter("deuxiemeReferer");        cout <<"Ajout du referer "<<referer<<endl;
   r.Ajouter("TroisiemeReferer");
   r.Ajouter("deuxiemeReferer");
 
@@ -56,10 +80,8 @@ int main (int argc, char* argv[])
   unsigned int i = r.getHitReferer("deuxiemeReferer");
   unsigned int j = r.getHitReferer("kdchzc");
 
-<<<<<<< HEAD
   /*LogRead log("test.log");
   string uneLigne = log.getLine(5);
-=======
   cout << "nb hit total : " << nbhit << endl << "nbhit deuxiemeReferer : " << i << endl;
   cout << "nbhit referer absent : " << j << endl;
 
@@ -75,24 +97,20 @@ int main (int argc, char* argv[])
   }*/
 
 
-  LogRead log("anonyme.log");
+/*  LogRead log("anonyme.log");
   string uneLigne = log.getLine(8);
->>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
 
   Cutter decoupe(uneLigne);
   string cible = decoupe.getCible();
   cout << "test de découpe Date : " << endl << cible << endl;
 
-<<<<<<< HEAD
   string referer = decoupe.getReferer();
   cout << "test de découpe Referer : " << endl << referer << endl;
   
   int hour = decoupe.getHour();
   cout << "On affiche l'heure : " << hour << endl;*/
-=======
-  string extension = decoupe.getExtension();
-  cout << "extension : " << extension << endl;
->>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
+  /*string extension = decoupe.getExtension();
+  cout << "extension : " << extension << endl;*/
 
 
   /*if(argc == 1)
@@ -104,13 +122,7 @@ int main (int argc, char* argv[])
 */
   return 0;
 
-<<<<<<< HEAD
 } //------ Fin de main
-=======
-    }*/
-    return 0;
-}
->>>>>>> a5ffd37d7fb64a1098890eafdf0227d6fb48f156
 
 void printManual()
 {
