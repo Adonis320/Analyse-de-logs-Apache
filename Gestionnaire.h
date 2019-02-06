@@ -38,6 +38,7 @@ public:
 
     void Ajouter(string referer, string cible);
     void Afficher();
+
     void FindTen();
 
 //------------------------------------------------- Surcharge d'opérateurs
