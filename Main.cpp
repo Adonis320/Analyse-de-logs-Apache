@@ -67,7 +67,8 @@ int main (int argc, char* argv[])
   a->FindTen();
   delete a;
   */
-
+ LogRead abc("LogRead.cpp");
+ cout << abc.getNumberOfLines() << endl;
 
   /* // Exemple de cutter
   

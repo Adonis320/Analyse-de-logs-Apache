@@ -46,6 +46,25 @@ string LogRead::getLine(unsigned int numLine)
     return ligne;
 }//-------Fin de la méthode getLine
 
+unsigned int LogRead::getNumberOfLines()
+{   
+    unsigned int nbLignes = 0;
+    ifstream log;
+    log.open(nomFichier);
+    char * tampon = new char [500+1];
+    if(log.is_open())
+    {
+        while(!log.eof())
+        {
+            log.getline(tampon, 500);
+            nbLignes++;
+        }
+        log.close();
+    }
+    delete [] tampon;
+    return nbLignes - 1;
+} //----Fin de getNumberOfLines
+
 //-------------------------------------------- Constructeurs - destructeur
 
 LogRead::LogRead (string nomFic )

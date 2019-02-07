@@ -13,6 +13,8 @@
 //-------------------------------------------------------- Include système
 #include <iostream>
 #include <cstring>
+#include <fstream>
+#include <set>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -77,7 +79,6 @@ void Gestionnaire::FindTen() //ATTENTION ON SUPPRIME LES 10 elements
     end = Table_Cibles -> end();
   
     int cond1 = 1;
-    int cond2 = 1;
     unsigned int it = 0;
     while(it < iterations)
     {  
@@ -98,7 +99,7 @@ void Gestionnaire::FindTen() //ATTENTION ON SUPPRIME LES 10 elements
 
         }
         element = Table_Cibles->begin();
-        while(element != end && cond2 == 1)
+        while(element != end)
         {   
             if(Table_Cibles->size() == 1)
             {   
@@ -106,7 +107,6 @@ void Gestionnaire::FindTen() //ATTENTION ON SUPPRIME LES 10 elements
                 cout << it << " /"<< element -> first << " (" << element->second->getHit() << " hits)" << endl;
                 delete element->second;
                 Table_Cibles->erase(element);
-                cond2 = 0;
                 break;
             }
             if((element->second)->getHit() == max)
@@ -129,9 +129,73 @@ void Gestionnaire::FindTen() //ATTENTION ON SUPPRIME LES 10 elements
             element++;
         }
     }
-    //on a mis les 10 ou x elements dans une nouvelle map + on les a retire de la map initiale
 } //----Fin de FindTen
-//pour afficher les 10 premiers il faut creer une autre map 
+
+
+void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int heure)
+{
+    LogRead monLogRead(nomFic);
+    unsigned int nbLignes = monLogRead.getNumberOfLines();
+    unsigned int charger = 1;
+    for(unsigned int i = 1; i < nbLignes; i++)
+    {   
+        charger = 1;
+        Cutter monCutter(monLogRead.getLine(i));
+        if(optException != 0)
+        {
+            string extension = monCutter.getExtension();
+            if(extension.compare("html") != 0) //ATTENTION est-ce qu'on garde autre chose que html ?
+            {
+                charger = 0;
+            }
+        }
+        if (optHeure != 0 && charger == 1)
+        {
+            int heureLog = monCutter.getHour();
+            if (heureLog != heure)
+            {
+                charger = 0;
+            }
+        }
+        if(charger == 1)
+        {
+            Ajouter(monCutter.getReferer(),monCutter.getCible());
+        }
+    }
+} //-----Fin de chargerLog
+
+void Gestionnaire::exportDot(string nomFic)
+{
+    ofstream outFile;
+    outFile.open(nomFic, ios::out | ios::trunc);
+    set <string> noms;
+    if (outFile.is_open()) 
+    {
+        outFile << "digraph {" << endl;
+        
+        map<string,Renseignement*>::iterator deb, fin;
+        deb = Table_Cibles->begin();
+        fin = Table_Cibles->end();
+        while(deb!=fin)
+        {
+            //TODO 
+            // IL Faut exporter tous les referants et les cibles dans le fichier + 
+            // faire les nodes, je pense utiliser deux iterators, et stocker les cibles 
+            // et les referants dans un set pour eviter les redondances
+         /*   if(noms.find(deb->first) == end)
+            {
+                outFile << deb->first <<";" << endl;
+                noms.insert(deb->first);
+            }
+            deb++; */
+        }
+        outFile << "}" << endl;
+    }
+    else
+    {
+        cout << "Erreur lors de l'ouverture du fichier .dot"<<endl;
+    }
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 ///Xxx & Xxx::operator = ( const Xxx & unXxx )
