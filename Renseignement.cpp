@@ -69,7 +69,7 @@ unsigned int Renseignement::getHitReferer(string referer)
 
     end = tabReferer->cend();
     position = tabReferer->find(referer);
-    int nbHit;
+    unsigned int nbHit;
 
     if(position == end)
     {

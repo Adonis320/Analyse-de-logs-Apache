@@ -159,7 +159,7 @@ void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int
                 charger = 0;
             }
         }*/
-        cout << i << endl;
+        //cout << i << endl;
         //if(charger == 1)
         //{
             Ajouter(monCutter.getReferer(),monCutter.getCible());
@@ -172,6 +172,7 @@ void Gestionnaire::exportDot(string nomFic)
     ofstream outFile;
     outFile.open(nomFic, ios::out | ios::trunc);
     set <string> noms;
+    char commas = 34;
     if (outFile.is_open()) 
     {
         outFile << "digraph {" << endl;
@@ -179,18 +180,38 @@ void Gestionnaire::exportDot(string nomFic)
         map<string,Renseignement*>::iterator deb, fin;
         deb = Table_Cibles->begin();
         fin = Table_Cibles->end();
+        list<string>::iterator debRens, finRens;
         while(deb!=fin)
         {
             //TODO 
             // IL Faut exporter tous les referants et les cibles dans le fichier + 
             // faire les nodes, je pense utiliser deux iterators, et stocker les cibles 
             // et les referants dans un set pour eviter les redondances
-         /*   if(noms.find(deb->first) == end)
+            list <string> * listeReferer = new list <string> (deb->second->getReferer());
+            debRens = listeReferer->begin();
+            finRens = listeReferer->end();
+            set <string>::iterator pos, finNoms;
+            finNoms = noms.end();
+            pos = noms.find(deb->first);
+            if(pos == finNoms)
             {
-                outFile << deb->first <<";" << endl;
+                outFile << commas << deb->first << commas <<";" << endl;
                 noms.insert(deb->first);
             }
-            deb++; */
+            while(debRens != finRens)
+            {
+                pos = noms.find(*debRens);
+                if(pos == finNoms)
+                {
+                    outFile << commas << *debRens << commas << ";" << endl;
+                    noms.insert(*debRens);
+                }
+                outFile << commas << *debRens << commas << " -> " << commas << deb->first << commas <<" [label=" << commas;
+                outFile << deb->second->getHitReferer(*debRens) << commas << "];" << endl;
+                debRens++;
+            }
+
+            deb++;
         }
         outFile << "}" << endl;
     }

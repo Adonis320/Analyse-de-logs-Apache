@@ -95,7 +95,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    map < string, Renseignement * > * Table_Cibles;
+    map < string, Renseignement *>  *Table_Cibles;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Gestionnaire>

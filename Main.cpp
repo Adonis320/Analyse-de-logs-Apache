@@ -70,8 +70,9 @@ int main (int argc, char* argv[])
  /*LogRead abc("anonyme.log");
  cout << abc.getNumberOfLines() << endl;*/
  Gestionnaire * a = new Gestionnaire;
- a->chargerLog("anonyme.log",0,0,0);
+ a->chargerLog("anonyme2.log",0,0,0);
  a->FindTen();
+ a->exportDot("lol.dot");
   delete a;
   /* // Exemple de cutter
   
