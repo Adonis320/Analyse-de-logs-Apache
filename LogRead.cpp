@@ -26,7 +26,7 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 string LogRead::getLine(unsigned int numLine)
 {
-    char * tampon = new char [500+1];
+    char * tampon = new char [1000+1];
     ifstream log;
     log.open(nomFichier.c_str());
     string ligne;
@@ -34,7 +34,7 @@ string LogRead::getLine(unsigned int numLine)
     {
         for(unsigned int i=1; i<=numLine;++i)
         {
-            log.getline(tampon,500);
+            log.getline(tampon,1000);
         }
         ligne = string(tampon);
     }
@@ -51,18 +51,18 @@ unsigned int LogRead::getNumberOfLines()
     unsigned int nbLignes = 0;
     ifstream log;
     log.open(nomFichier);
-    char * tampon = new char [500+1];
+    char * tampon = new char [1000+1];
     if(log.is_open())
     {
         while(!log.eof())
         {
-            log.getline(tampon, 500);
+            log.getline(tampon, 1000);
             nbLignes++;
         }
         log.close();
     }
     delete [] tampon;
-    return nbLignes - 1;
+    return nbLignes;
 } //----Fin de getNumberOfLines
 
 //-------------------------------------------- Constructeurs - destructeur

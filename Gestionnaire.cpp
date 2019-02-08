@@ -137,11 +137,13 @@ void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int
     LogRead monLogRead(nomFic);
     unsigned int nbLignes = monLogRead.getNumberOfLines();
     unsigned int charger = 1;
+    Cutter monCutter(monLogRead.getLine(1));
+    cout << nbLignes << endl;
     for(unsigned int i = 1; i < nbLignes; i++)
     {   
-        charger = 1;
-        Cutter monCutter(monLogRead.getLine(i));
-        if(optException != 0)
+        monCutter.setlogLine(monLogRead.getLine(i));
+        //charger = 1;
+        /*if(optException != 0)
         {
             string extension = monCutter.getExtension();
             if(extension.compare("html") != 0) //ATTENTION est-ce qu'on garde autre chose que html ?
@@ -156,11 +158,12 @@ void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int
             {
                 charger = 0;
             }
-        }
-        if(charger == 1)
-        {
+        }*/
+        cout << i << endl;
+        //if(charger == 1)
+        //{
             Ajouter(monCutter.getReferer(),monCutter.getCible());
-        }
+        //}
     }
 } //-----Fin de chargerLog
 

@@ -67,9 +67,12 @@ int main (int argc, char* argv[])
   a->FindTen();
   delete a;
   */
- LogRead abc("LogRead.cpp");
- cout << abc.getNumberOfLines() << endl;
-
+ /*LogRead abc("anonyme.log");
+ cout << abc.getNumberOfLines() << endl;*/
+ Gestionnaire * a = new Gestionnaire;
+ a->chargerLog("anonyme.log",0,0,0);
+ a->FindTen();
+  delete a;
   /* // Exemple de cutter
   
   /*Renseignement r("MonReferer");

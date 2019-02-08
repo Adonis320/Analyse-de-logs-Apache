@@ -52,7 +52,7 @@ void Renseignement::Ajouter(string referer)
     }
     else
     {
-     //   position->second = position->second + 1;
+        position->second = position->second + 1;
     }
     nbHitTotal++;
 }//------ Fin de la méthode Ajouter
