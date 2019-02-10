@@ -78,7 +78,6 @@ void Gestionnaire::FindTen()
     unsigned int max = 0;
     element = Table_Cibles -> begin();
     end = Table_Cibles -> end();
-
     int cond1 = 1;
     unsigned int it = 0;
     while(it < iterations)
@@ -148,7 +147,9 @@ void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int
         if(optException == true)
         {
             string extension = cut.getExtension();
-            if(extension.compare("html") != 0) //ATTENTION est-ce qu'on garde autre chose que html ?
+            if(extension.compare("css") == 0 || extension.compare("js") == 0 || extension.compare("png") == 0 ||
+            extension.compare("jpg") == 0 || extension.compare("gif") == 0 || extension.compare("bmp") == 0 ||
+            extension.compare("ico") == 0) 
             {
                 charger = 0;
             }

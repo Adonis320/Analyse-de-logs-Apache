@@ -67,16 +67,11 @@ int main (int argc, char* argv[])
           tabParam[positionTabParam] = 'g';
           positionTabParam++;
         }
-        else if ( (i+1) < argc -1 && strcmp(getExtension(argv[i + 1]).c_str(),"" ) == 0)
+        else
         {
           nameDotFile = "Default.log";
           tabParam[positionTabParam] = 'g';
           positionTabParam++;
-        }
-        else if ( (i+1 < argc -1))
-        {
-          requete = false;
-          break;
         }
       }
       else if(strcmp (argv[i], "-t") == 0) // test -t passé en paramètre et chercher heure associée
@@ -159,6 +154,7 @@ string getExtension (string nomFichier)
 
 void requeteCatalogue(string nomLog, char param[], int heure, string nomFichierGraph)
 {
+  cout << nomFichierGraph << endl;
   Gestionnaire monGestionnaire;
   bool optionE = false;
   bool optionT = false;
