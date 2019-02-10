@@ -122,7 +122,7 @@ int main (int argc, char* argv[])
 void printManual()
 {
   cout << "-----MANUEL-------" << endl;
-  /*cout << endl << "NAME" << endl;
+  cout << endl << "NAME" << endl;
   cout << "    analog - Analyse de log" << endl << endl;
   cout << "SYNOPSIS" << endl;
   cout << "    ./analog [OPTION]....Namefile.log" << endl << endl;
@@ -136,7 +136,7 @@ void printManual()
   cout << "    ./analog -e -g nomFichier.dot nomFichier.log" << endl;
   cout << "               ignore les extensions image-css-javascript + generate GraphViz file" << endl << endl;
   cout << "AUTHORS" << endl;
-  cout << "     Written by Ludovic RICHOUX and Adonis KATTAN" << endl << endl;*/
+  cout << "     Written by Ludovic RICHOUX and Adonis KATTAN" << endl << endl;
 } //------ Fin de printManual
 
 string getExtension (string nomFichier)
@@ -167,7 +167,6 @@ void requeteCatalogue(string nomLog, char param[], int heure, string nomFichierG
 
   for(i = 0; i < 3; i++)
   { 
-    //cout << param[i] << endl;
     if( param[i] == 'e')
     {
       optionE = true;
