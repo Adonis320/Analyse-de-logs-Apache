@@ -219,7 +219,7 @@ void Gestionnaire::exportDot(string nomFic)
     }
     else
     {
-        cout << "Erreur lors de l'ouverture du fichier .dot"<<endl;
+        cerr << "Erreur lors de l'ouverture du fichier .dot"<<endl;
     }
 } //----- Fin de exportDot
 
