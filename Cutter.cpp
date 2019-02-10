@@ -64,7 +64,6 @@ string Cutter::getReferer()
 int Cutter::getHour()
 {
     string date = getDate();
-    cout << date << endl;
     string hour = date.substr(12,2);
     int heure = stoi(hour);
     return heure;

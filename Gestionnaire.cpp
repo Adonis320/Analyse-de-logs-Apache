@@ -2,7 +2,7 @@
                            Gestionnaire  -  description
                              -------------------
     début                : 15 janvier 2019
-    copyright            : (C) $YEAR$ par $AUTHOR$
+    copyright            : (C) 2019 Kattan Adonis & Richoux Ludovic
     e-mail               : $EMAIL$
 *************************************************************************/
 
@@ -25,13 +25,10 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 void Gestionnaire::Ajouter(string referer, string cible)
+// Algorithme : Verifie l'existence de la cible, et en fonction verifie
+//              verifie l'existence du referer, et les ajoute a la map
 {
     map<string,Renseignement*>::iterator position;
     map<string,Renseignement*>::iterator end = Table_Cibles->end();
@@ -49,6 +46,9 @@ void Gestionnaire::Ajouter(string referer, string cible)
 } //------Fin de Ajouter
 
 void Gestionnaire::Afficher()
+// Algorithme : parcourt tous les elements de la map et les affiche,
+//              fait aussi appel a la methode Affiche() du second element
+//              de la map 
 {
     map<string,Renseignement*>::iterator debut;
     map<string,Renseignement*>::iterator fin;
@@ -62,22 +62,23 @@ void Gestionnaire::Afficher()
     }
 } //-----Fin de Afficher
 
-void Gestionnaire::FindTen() //ATTENTION ON SUPPRIME LES 10 elements
+void Gestionnaire::FindTen() 
+// Algorithme : parcourt toute la Table_Cibles et trouve le max de nbHits,
+//              refait un second parcours, affiche le max et la cible, puis le supprime
+//              de la map
 {   
     unsigned int nb_elements = Table_Cibles->size();
-    cout<<"TAILLE = "<< nb_elements << endl;
     unsigned int iterations = 10;
     if(nb_elements < 10)
     {
         iterations = nb_elements;
     }
-    cout <<"ITER = " << iterations << endl;
     map<string,Renseignement*>::iterator element;
     map<string,Renseignement*>::iterator end;
     unsigned int max = 0;
     element = Table_Cibles -> begin();
     end = Table_Cibles -> end();
-  
+
     int cond1 = 1;
     unsigned int it = 0;
     while(it < iterations)
@@ -115,8 +116,6 @@ void Gestionnaire::FindTen() //ATTENTION ON SUPPRIME LES 10 elements
                 cout << it << " /"<< element -> first << " (" << element->second->getHit() << " hits)" << endl;
                 delete element->second;
                 Table_Cibles->erase(element);
-                element = Table_Cibles->begin();
-                end = Table_Cibles -> end();
                 if(it >= iterations)
                 {
                     break;
@@ -133,41 +132,47 @@ void Gestionnaire::FindTen() //ATTENTION ON SUPPRIME LES 10 elements
 
 
 void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int heure)
+// Algorithme : en fonction des parametres, recupere une ligne du fichier, si conforme en cree
+//              une instance dans la map
 {
-    LogRead monLogRead(nomFic);
-    unsigned int nbLignes = monLogRead.getNumberOfLines();
-    unsigned int charger = 1;
-    Cutter monCutter(monLogRead.getLine(1));
-    cout << nbLignes << endl;
-    for(unsigned int i = 1; i < nbLignes; i++)
-    {   
-        monCutter.setlogLine(monLogRead.getLine(i));
-        //charger = 1;
-        /*if(optException != 0)
+    LogRead log(nomFic);
+    string s = log.getLine(1);
+    Cutter cut ("");
+    unsigned int i=1;
+    int charger;
+    int heureLog;
+    while (strcmp(s.c_str(), "") != 0)
+    {
+        cut.setlogLine(s);
+        charger = 1;
+        if(optException == true)
         {
-            string extension = monCutter.getExtension();
+            string extension = cut.getExtension();
             if(extension.compare("html") != 0) //ATTENTION est-ce qu'on garde autre chose que html ?
             {
                 charger = 0;
             }
         }
-        if (optHeure != 0 && charger == 1)
+        if (optHeure == true && charger == 1)
         {
-            int heureLog = monCutter.getHour();
+            heureLog = cut.getHour();
             if (heureLog != heure)
             {
                 charger = 0;
             }
-        }*/
-        //cout << i << endl;
-        //if(charger == 1)
-        //{
-            Ajouter(monCutter.getReferer(),monCutter.getCible());
-        //}
+        }
+        if(charger == 1)
+        {
+            Ajouter(cut.getReferer(),cut.getCible());
+        }
+        s = log.getLine(++i);
     }
 } //-----Fin de chargerLog
 
 void Gestionnaire::exportDot(string nomFic)
+// Algorithme : parcourt la map, exporte dans un fichier.dot les cibles et les refereurs
+//              puis le nombre de hits par couple de cibles-refereurs 
+//
 {
     ofstream outFile;
     outFile.open(nomFic, ios::out | ios::trunc);
@@ -183,10 +188,6 @@ void Gestionnaire::exportDot(string nomFic)
         list<string>::iterator debRens, finRens;
         while(deb!=fin)
         {
-            //TODO 
-            // IL Faut exporter tous les referants et les cibles dans le fichier + 
-            // faire les nodes, je pense utiliser deux iterators, et stocker les cibles 
-            // et les referants dans un set pour eviter les redondances
             list <string> * listeReferer = new list <string> (deb->second->getReferer());
             debRens = listeReferer->begin();
             finRens = listeReferer->end();
@@ -210,7 +211,7 @@ void Gestionnaire::exportDot(string nomFic)
                 outFile << deb->second->getHitReferer(*debRens) << commas << "];" << endl;
                 debRens++;
             }
-
+            delete listeReferer;
             deb++;
         }
         outFile << "}" << endl;
@@ -219,20 +220,10 @@ void Gestionnaire::exportDot(string nomFic)
     {
         cout << "Erreur lors de l'ouverture du fichier .dot"<<endl;
     }
-}
-
-//------------------------------------------------- Surcharge d'opérateurs
-///Xxx & Xxx::operator = ( const Xxx & unXxx )
-// Algorithme :
-//
-//{
-//} //----- Fin de operator =
-
+} //----- Fin de exportDot
 
 //-------------------------------------------- Constructeurs - destructeur
 Gestionnaire::Gestionnaire ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Gestionnaire>" << endl;
@@ -242,8 +233,6 @@ Gestionnaire::Gestionnaire ( )
 
 
 Gestionnaire::~Gestionnaire ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Gestionnaire>" << endl;

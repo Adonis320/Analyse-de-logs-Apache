@@ -21,74 +21,11 @@ using namespace std;
 #include "Cutter.h"
 #include "Renseignement.h"
 #include "Gestionnaire.h"
-///////////////////////////////////////////////////////////////////  PRIVE
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
-//---------------------------------------------------- Variables statiques
-
-//------------------------------------------------------ Fonctions privées
-//static type nom ( liste de paramètres )
-// Mode d'emploi :
-//
-// Contrat :
-//
-// Algorithme :
-//
-//{
-//} //----- fin de nom
 
 //////////////////////////////////////////////////////////////////  PUBLIC
 //---------------------------------------------------- Fonctions publiques
 int main (int argc, char* argv[])
 {   
-   /////////TEST POUR LE FINDTEN()
- /* Gestionnaire * a = new Gestionnaire(); 
-  a->Ajouter("B","A");
-  a->Ajouter("C","D");
-  a->Ajouter("D","C");
- a->Ajouter("E","C"); 
-  a->Ajouter("F","J");
-  a->Ajouter("J","H");
-  a->Ajouter("LOL","M");
-  a->Ajouter("LOL","M");
-  a->Ajouter("LOL","M");
-  a->Ajouter("LOL","M");
-  a->Ajouter("LOL","M");
-  a->Ajouter("LOL","O");
-  a->Ajouter("LOL","P");
-  a->Ajouter("LOL","Q");
-  a->Ajouter("LOL","R");
-  a->Ajouter("LOL","S");
-  a->Ajouter("LOL","Sddw");
-  a->Ajouter("LOL","Sddw");
-  a->Afficher();
-  a->FindTen();
-  delete a;
-  */
- /*LogRead abc("anonyme.log");
- cout << abc.getNumberOfLines() << endl;*/
- Gestionnaire * a = new Gestionnaire;
- a->chargerLog("anonyme2.log",0,0,0);
- a->FindTen();
- a->exportDot("lol.dot");
-  delete a;
-  /* // Exemple de cutter
-  
-  /*Renseignement r("MonReferer");
-  r.Ajouter("deuxiemeReferer");        cout <<"Ajout du referer "<<referer<<endl;
-  r.Ajouter("TroisiemeReferer");
-  r.Ajouter("deuxiemeReferer");
-
-  unsigned int nbhit = r.getHit();
-  unsigned int i = r.getHitReferer("deuxiemeReferer");
-  unsigned int j = r.getHitReferer("kdchzc");
-
-  /*LogRead log("test.log");
-  string uneLigne = log.getLine(5);
-  cout << "nb hit total : " << nbhit << endl << "nbhit deuxiemeReferer : " << i << endl;
-  cout << "nbhit referer absent : " << j << endl;
   string nameLogFile;
   string nameDotFile;
   char tabParam[] = {'0','0','0'};
@@ -99,13 +36,6 @@ int main (int argc, char* argv[])
 
   if(argc == 1 )        // pas de nom de fichier passé en paramètre
   {
-    cout << *deb << endl;
-    deb++;
-  }*/
-
-
-/*  LogRead log("anonyme.log");
-  string uneLigne = log.getLine(8);
       requete = false;
   }
   else
@@ -134,30 +64,20 @@ int main (int argc, char* argv[])
         if( (i + 1) < argc -1 && strcmp((getExtension(argv[i + 1])).c_str(),"dot") == 0) // le suivant est un fichier .dot conforme
         {
           nameDotFile = argv[++i];
+          tabParam[positionTabParam] = 'g';
+          positionTabParam++;
         }
         else if ( (i+1) < argc -1 && strcmp(getExtension(argv[i + 1]).c_str(),"" ) == 0)
         {
           nameDotFile = "Default.log";
+          tabParam[positionTabParam] = 'g';
+          positionTabParam++;
         }
         else if ( (i+1 < argc -1))
         {
           requete = false;
           break;
         }
-
-        tabParam[positionTabParam] = 'g';
-        positionTabParam++;
-
-  string referer = decoupe.getReferer();
-  cout << "test de découpe Referer : " << endl << referer << endl;
-  
-  int hour = decoupe.getHour();
-  cout << "On affiche l'heure : " << hour << endl;*/
-  /*string extension = decoupe.getExtension();
-  cout << "extension : " << extension << endl;*/
-
-
-  /*if(argc == 1)
       }
       else if(strcmp (argv[i], "-t") == 0) // test -t passé en paramètre et chercher heure associée
       {
@@ -221,7 +141,7 @@ void printManual()
 
 string getExtension (string nomFichier)
 {
-  // string:: npos si on trouve pas
+  // string:: npos si on trouve pas le caractère recherché
   string extension;
   size_t position = nomFichier.find_last_of("."); 
 
@@ -239,7 +159,36 @@ string getExtension (string nomFichier)
 
 void requeteCatalogue(string nomLog, char param[], int heure, string nomFichierGraph)
 {
-  // si les options sont pas demandées: hour =-1, nomFichierGraph ="", et tabParam = [0]
-  cout << "execution de la requete avec param demandé" << endl;
+  Gestionnaire monGestionnaire;
+  bool optionE = false;
+  bool optionT = false;
+  bool optionG = false;
+  int i;
+
+  for(i = 0; i < 3; i++)
+  { 
+    //cout << param[i] << endl;
+    if( param[i] == 'e')
+    {
+      optionE = true;
+    }
+    else if(param[i] == 'g')
+    {
+      optionG = true;
+    }
+    else if(param[i] == 't')
+    {
+      optionT = true;
+    }
+  }
+
+  monGestionnaire.chargerLog(nomLog,optionE, optionT, heure);
+
+  if(optionG)
+  {
+    monGestionnaire.exportDot(nomFichierGraph);
+  }
+  
+  monGestionnaire.FindTen();
 
 }//---------- Fin de requete Catalogue

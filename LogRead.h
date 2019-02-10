@@ -32,13 +32,7 @@ public:
     // Mode d'emploi :
     //      retourne la nième ligne du fichier nomfic
     // Contrat :
-    //      ne fonctionne pas pour un numéro de ligne égal à 0
-
-    unsigned int getNumberOfLines();
-    // Mode d'emploi :
-    //      retourne le nombre total de lignes dans monFichier 
-    // Contrat :
-    //      
+    //      ne fonctionne pas pour un numéro de ligne égal à 0   
 
 //-------------------------------------------- Constructeurs - destructeur
 
