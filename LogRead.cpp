@@ -42,7 +42,7 @@ LogRead::LogRead (string nomFic )
     log.open(nomFic.c_str());
     if(!log.is_open())
     {
-        cerr << "Problème lors de l'ouverture du fichier" << endl;
+        cerr << "Problème lors de l'ouverture du fichier, le fichier spécifié peut être inexistant" << endl;
     }
     
 } //----- Fin de LogRead
