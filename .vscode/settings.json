@@ -1,19 +1,6 @@
 {
     "files.associations": {
         "iostream": "cpp",
-<<<<<<< HEAD
-        "new": "cpp",
-        "limits": "cpp",
-        "ostream": "cpp",
-        "array": "cpp",
-        "list": "cpp",
-        "unordered_map": "cpp",
-        "vector": "cpp",
-        "initializer_list": "cpp",
-        "string_view": "cpp",
-        "*.tcc": "cpp"
-=======
         "ostream": "cpp"
->>>>>>> 33b300f2a5066d96facaf7698c1f3f55a8e6b963
     }
 }

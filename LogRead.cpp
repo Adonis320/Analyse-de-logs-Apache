@@ -13,7 +13,6 @@
 //-------------------------------------------------------- Include système
 #include <iostream>
 #include <string>
-#include <fstream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -24,25 +23,12 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-string LogRead::getLine(unsigned int numLine)
+string LogRead::getLine()
 {
-    char * tampon = new char [1000+1];
-    ifstream log;
-    log.open(nomFichier.c_str());
     string ligne;
-    if(log.is_open())
-    {
-        for(unsigned int i=1; i<=numLine;++i)
-        {
-            log.getline(tampon,1000);
-        }
-        ligne = string(tampon);
-    }
-    else
-    {
-        cerr << "Problème lors de l'ouverture du fichier" << endl;
-    }
-    delete [] tampon;
+    char * tampon = new char [1000 +1];
+    log.getline(tampon,1000);
+    ligne = string(tampon);
     return ligne;
 }//-------Fin de la méthode getLine
 
@@ -53,7 +39,12 @@ LogRead::LogRead (string nomFic )
 #ifdef MAP
     cout << "Appel au constructeur de <LogRead>" << endl;
 #endif
-    nomFichier = nomFic;
+    log.open(nomFic.c_str());
+    if(!log.is_open())
+    {
+        cerr << "Problème lors de l'ouverture du fichier" << endl;
+    }
+    
 } //----- Fin de LogRead
 
 
@@ -62,6 +53,7 @@ LogRead::~LogRead ( )
 #ifdef MAP
     cout << "Appel au destructeur de <LogRead>" << endl;
 #endif
+    log.close();
 } //----- Fin de ~LogRead
 
 

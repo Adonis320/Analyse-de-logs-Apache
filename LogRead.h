@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
+#include <fstream>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -28,11 +29,12 @@ class LogRead
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    string getLine(unsigned int numLine);
+    string getLine();
     // Mode d'emploi :
-    //      retourne la nième ligne du fichier nomfic
+    //      retourne la nbLigne ième ligne du fichier nomfic, et une string vide 
+    //      si on atteint la fin du fichier
     // Contrat :
-    //      ne fonctionne pas pour un numéro de ligne égal à 0   
+    //      
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -55,7 +57,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 	
-	string nomFichier;
+	ifstream log;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>

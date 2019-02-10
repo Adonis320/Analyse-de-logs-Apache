@@ -136,9 +136,9 @@ void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int
 //              une instance dans la map
 {
     LogRead log(nomFic);
-    string s = log.getLine(1);
+    string s = log.getLine();
     Cutter cut ("");
-    unsigned int i=1;
+    
     int charger;
     int heureLog;
     while (strcmp(s.c_str(), "") != 0)
@@ -165,7 +165,7 @@ void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int
         {
             Ajouter(cut.getReferer(),cut.getCible());
         }
-        s = log.getLine(++i);
+        s = log.getLine();
     }
 } //-----Fin de chargerLog
 
