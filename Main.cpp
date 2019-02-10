@@ -154,7 +154,6 @@ string getExtension (string nomFichier)
 
 void requeteCatalogue(string nomLog, char param[], int heure, string nomFichierGraph)
 {
-  cout << nomFichierGraph << endl;
   Gestionnaire monGestionnaire;
   bool optionE = false;
   bool optionT = false;
