@@ -46,7 +46,8 @@ string getExtension( string nomFichier);
 
 void requeteCatalogue(string nomLog, char param[], int heure, string nomFichierGraph);
 // Mode d'emploi
-//
+//        Commande les operations sur le gestionnaire (catalogue) 
+//        selon les parametres de la ligne de commande
 // Contrat
 //
 

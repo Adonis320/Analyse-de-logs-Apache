@@ -3,7 +3,7 @@
                              -------------------
     début                : 15 janvier 2019
     copyright            : (C) 2019 par Kattan Adonis & Richoux Ludovic
-    e-mail               : $EMAIL$
+    e-mail               : ludovic.richoux@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Gestionnaire> (fichier Gestionnaire.h) ----------------

@@ -3,7 +3,7 @@
                              -------------------
     début                : 15 janvier 2019
     copyright            : (C) 2019 Kattan Adonis & Richoux Ludovic
-    e-mail               : $EMAIL$
+    e-mail               : ludovic.richoux@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Gestionnaire> (fichier Gestionnaire.cpp) ------------
@@ -28,7 +28,7 @@ using namespace std;
 
 void Gestionnaire::Ajouter(string referer, string cible)
 // Algorithme : Verifie l'existence de la cible, et en fonction verifie
-//              verifie l'existence du referer, et les ajoute a la map
+//              fait appel a la methode ajouter de Renseignement
 {
     map<string,Renseignement*>::iterator position;
     map<string,Renseignement*>::iterator end = Table_Cibles->end();
@@ -69,7 +69,7 @@ void Gestionnaire::FindTen()
 {   
     unsigned int nb_elements = Table_Cibles->size();
     unsigned int iterations = 10;
-    if(nb_elements < 10)
+    if(nb_elements < 10) // 10 iterations si plus de 10 elements, sinon meme nb d'elements
     {
         iterations = nb_elements;
     }
@@ -85,7 +85,7 @@ void Gestionnaire::FindTen()
         element = Table_Cibles->begin();
         end = Table_Cibles -> end();
         max = 0;
-        while(element != end && cond1 == 1)
+        while(element != end && cond1 == 1) //on trouve les valeurs max de nbHitTotal
         {   
             if((element->second)->getHit() >= max)
             {
@@ -99,16 +99,8 @@ void Gestionnaire::FindTen()
 
         }
         element = Table_Cibles->begin();
-        while(element != end)
+        while(element != end) // on cherche les cibles qui ont nbHitTotal = max
         {   
-            if(Table_Cibles->size() == 1)
-            {   
-                it ++;
-                cout << it << " /"<< element -> first << " (" << element->second->getHit() << " hits)" << endl;
-                delete element->second;
-                Table_Cibles->erase(element);
-                break;
-            }
             if((element->second)->getHit() == max)
             {
                 it++;
@@ -144,7 +136,7 @@ void Gestionnaire::chargerLog(string nomFic, int optException, int optHeure, int
     {
         cut.setlogLine(s);
         charger = 1;
-        if(optException == true)
+        if(optException == true) // exclure les extensions
         {
             string extension = cut.getExtension();
             if(extension.compare("css") == 0 || extension.compare("js") == 0 || extension.compare("png") == 0 ||
@@ -177,8 +169,8 @@ void Gestionnaire::exportDot(string nomFic)
 {
     ofstream outFile;
     outFile.open(nomFic, ios::out | ios::trunc);
-    set <string> noms;
-    char commas = 34;
+    set <string> noms; //contient toutes les cibles et referers deja exportes
+    char commas = 34; // commas: "
     if (outFile.is_open()) 
     {
         outFile << "digraph {" << endl;
@@ -190,6 +182,7 @@ void Gestionnaire::exportDot(string nomFic)
         while(deb!=fin)
         {
             list <string> * listeReferer = new list <string> (deb->second->getReferer());
+            // la liste qui contient tous les referers pour une cible donnee
             debRens = listeReferer->begin();
             finRens = listeReferer->end();
             set <string>::iterator pos, finNoms;
@@ -200,7 +193,7 @@ void Gestionnaire::exportDot(string nomFic)
                 outFile << commas << deb->first << commas <<";" << endl;
                 noms.insert(deb->first);
             }
-            while(debRens != finRens)
+            while(debRens != finRens) // on ecrit les noeuds
             {
                 pos = noms.find(*debRens);
                 if(pos == finNoms)
